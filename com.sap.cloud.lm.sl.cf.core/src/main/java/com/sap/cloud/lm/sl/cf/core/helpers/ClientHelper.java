@@ -4,8 +4,8 @@ import java.text.MessageFormat;
 import java.util.UUID;
 
 import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.domain.CloudSpace;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

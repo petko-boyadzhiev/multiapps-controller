@@ -1,15 +1,15 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
+import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudApplicationExtended;
+import com.sap.cloud.lm.sl.cf.client.lib.domain.ImmutableCloudApplicationExtended;
+import com.sap.cloud.lm.sl.cf.process.Constants;
+import com.sap.cloud.lm.sl.common.SLException;
+import com.sap.cloud.lm.sl.common.util.JsonUtil;
+import com.sap.cloud.lm.sl.common.util.MapUtil;
+import com.sap.cloud.lm.sl.common.util.TestUtil;
 import org.cloudfoundry.client.lib.domain.CloudServiceBroker;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,13 +22,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 
-import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudApplicationExtended;
-import com.sap.cloud.lm.sl.cf.client.lib.domain.ImmutableCloudApplicationExtended;
-import com.sap.cloud.lm.sl.cf.process.Constants;
-import com.sap.cloud.lm.sl.common.SLException;
-import com.sap.cloud.lm.sl.common.util.JsonUtil;
-import com.sap.cloud.lm.sl.common.util.MapUtil;
-import com.sap.cloud.lm.sl.common.util.TestUtil;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
 public class CreateOrUpdateServiceBrokerStepTest extends SyncFlowableStepTest<CreateOrUpdateServiceBrokerStep> {

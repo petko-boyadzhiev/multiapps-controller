@@ -1,32 +1,5 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
-import javax.inject.Inject;
-
-import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudException;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.cloudfoundry.client.lib.CloudServiceBrokerException;
-import org.cloudfoundry.client.lib.domain.CloudApplication;
-import org.cloudfoundry.client.lib.domain.CloudEntity;
-import org.cloudfoundry.client.lib.domain.CloudService;
-import org.cloudfoundry.client.lib.domain.CloudServiceBinding;
-import org.cloudfoundry.client.lib.domain.CloudServiceInstance;
-import org.cloudfoundry.client.lib.domain.CloudServiceKey;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-
 import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudServiceExtended;
 import com.sap.cloud.lm.sl.cf.client.lib.domain.ImmutableCloudServiceExtended;
 import com.sap.cloud.lm.sl.cf.core.cf.clients.EventsGetter;
@@ -35,6 +8,31 @@ import com.sap.cloud.lm.sl.cf.core.security.serialization.SecureSerializationFac
 import com.sap.cloud.lm.sl.cf.process.message.Messages;
 import com.sap.cloud.lm.sl.common.SLException;
 import com.sap.cloud.lm.sl.common.util.JsonUtil;
+import org.cloudfoundry.client.lib.CloudControllerClient;
+import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.domain.CloudEntity;
+import org.cloudfoundry.client.lib.domain.CloudService;
+import org.cloudfoundry.client.lib.domain.CloudServiceBinding;
+import org.cloudfoundry.client.lib.domain.CloudServiceInstance;
+import org.cloudfoundry.client.lib.domain.CloudServiceKey;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.cloudfoundry.client.lib.exception.CloudServiceBrokerException;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component("deleteServicesStep")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -63,7 +61,7 @@ public class DeleteServicesStep extends AsyncFlowableStep {
             List<String> servicesWithoutData = getServicesWithoutData(servicesToDelete, servicesData);
             if (!servicesWithoutData.isEmpty()) {
                 execution.getStepLogger()
-                    .info(Messages.SERVICES_ARE_ALREADY_DELETED, servicesWithoutData);
+                         .info(Messages.SERVICES_ARE_ALREADY_DELETED, servicesWithoutData);
                 servicesToDelete.removeAll(servicesWithoutData);
             }
             StepsUtil.setServicesData(execution.getContext(), servicesData);
@@ -71,7 +69,7 @@ public class DeleteServicesStep extends AsyncFlowableStep {
             Map<String, ServiceOperationType> triggeredServiceOperations = deleteServices(client, servicesToDelete);
 
             execution.getStepLogger()
-                .debug(Messages.TRIGGERED_SERVICE_OPERATIONS, JsonUtil.toJson(triggeredServiceOperations, true));
+                     .debug(Messages.TRIGGERED_SERVICE_OPERATIONS, JsonUtil.toJson(triggeredServiceOperations, true));
             StepsUtil.setTriggeredServiceOperations(execution.getContext(), triggeredServiceOperations);
 
             getStepLogger().debug(Messages.SERVICES_DELETED);
@@ -86,19 +84,19 @@ public class DeleteServicesStep extends AsyncFlowableStep {
         CloudControllerClient client = execution.getControllerClient();
 
         return serviceNames.parallelStream()
-            .map(name -> client.getService(name, false))
-            .filter(Objects::nonNull)
-            .map(service -> ImmutableCloudServiceExtended.builder()
-                .metadata(service.getMetadata())
-                .name(service.getName())
-                .build())
-            .collect(Collectors.toMap(CloudEntity::getName, e -> e));
+                           .map(name -> client.getService(name, false))
+                           .filter(Objects::nonNull)
+                           .map(service -> ImmutableCloudServiceExtended.builder()
+                                                                        .metadata(service.getMetadata())
+                                                                        .name(service.getName())
+                                                                        .build())
+                           .collect(Collectors.toMap(CloudEntity::getName, e -> e));
     }
 
     private List<String> getServicesWithoutData(List<String> servicesToDelete, Map<String, CloudServiceExtended> servicesData) {
         return servicesToDelete.stream()
-            .filter(name -> servicesData.get(name) == null)
-            .collect(Collectors.toList());
+                               .filter(name -> servicesData.get(name) == null)
+                               .collect(Collectors.toList());
     }
 
     private Map<String, ServiceOperationType> deleteServices(CloudControllerClient client, List<String> serviceNames) {
@@ -131,8 +129,8 @@ public class DeleteServicesStep extends AsyncFlowableStep {
         for (CloudServiceBinding binding : bindings) {
             CloudApplication application = StepsUtil.getBoundApplication(client.getApplications(), binding.getApplicationGuid());
             if (application == null) {
-                throw new IllegalStateException(
-                    MessageFormat.format(Messages.COULD_NOT_FIND_APPLICATION_WITH_GUID_0, binding.getApplicationGuid()));
+                throw new IllegalStateException(MessageFormat.format(Messages.COULD_NOT_FIND_APPLICATION_WITH_GUID_0,
+                                                                     binding.getApplicationGuid()));
             }
             getStepLogger().info(Messages.UNBINDING_APP_FROM_SERVICE, application.getName(), serviceName);
             client.unbindService(application.getName(), serviceName);
@@ -190,7 +188,7 @@ public class DeleteServicesStep extends AsyncFlowableStep {
         }
         CloudService service = serviceInstance.getService();
         return MessageFormat.format(Messages.ERROR_DELETING_SERVICE, service.getName(), service.getLabel(), service.getPlan(),
-            e.getMessage());
+                                    e.getMessage());
     }
 
     private void logBindings(List<CloudServiceBinding> bindings) {

@@ -1,26 +1,22 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
+import com.sap.cloud.lm.sl.cf.core.dao.ConfigurationEntryDao;
+import com.sap.cloud.lm.sl.cf.core.dao.ConfigurationSubscriptionDao;
+import com.sap.cloud.lm.sl.cf.core.dao.filters.ConfigurationFilter;
+import com.sap.cloud.lm.sl.cf.core.helpers.ModuleToDeployHelper;
+import com.sap.cloud.lm.sl.cf.core.model.CloudTarget;
+import com.sap.cloud.lm.sl.cf.core.model.ConfigurationEntry;
+import com.sap.cloud.lm.sl.cf.core.model.ConfigurationSubscription;
+import com.sap.cloud.lm.sl.cf.process.Constants;
+import com.sap.cloud.lm.sl.common.util.JsonUtil;
+import com.sap.cloud.lm.sl.common.util.Pair;
+import com.sap.cloud.lm.sl.common.util.TestUtil;
+import com.sap.cloud.lm.sl.mta.model.Module;
 import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
 import org.cloudfoundry.client.lib.domain.CloudSpace;
 import org.cloudfoundry.client.lib.domain.ImmutableCloudApplication;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.flowable.variable.api.history.HistoricVariableInstance;
 import org.junit.Before;
 import org.junit.Rule;
@@ -35,18 +31,21 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 
-import com.sap.cloud.lm.sl.cf.core.dao.ConfigurationEntryDao;
-import com.sap.cloud.lm.sl.cf.core.dao.ConfigurationSubscriptionDao;
-import com.sap.cloud.lm.sl.cf.core.dao.filters.ConfigurationFilter;
-import com.sap.cloud.lm.sl.cf.core.helpers.ModuleToDeployHelper;
-import com.sap.cloud.lm.sl.cf.core.model.CloudTarget;
-import com.sap.cloud.lm.sl.cf.core.model.ConfigurationEntry;
-import com.sap.cloud.lm.sl.cf.core.model.ConfigurationSubscription;
-import com.sap.cloud.lm.sl.cf.process.Constants;
-import com.sap.cloud.lm.sl.common.util.JsonUtil;
-import com.sap.cloud.lm.sl.common.util.Pair;
-import com.sap.cloud.lm.sl.common.util.TestUtil;
-import com.sap.cloud.lm.sl.mta.model.Module;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(Parameterized.class)
 public class UpdateSubscribersStepTest extends SyncFlowableStepTest<UpdateSubscribersStep> {

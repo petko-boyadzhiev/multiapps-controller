@@ -10,6 +10,7 @@ import org.cloudfoundry.client.lib.domain.CloudApplication;
 import org.cloudfoundry.client.lib.domain.CloudInfo;
 import org.cloudfoundry.client.lib.domain.ImmutableCloudApplication;
 import org.cloudfoundry.client.lib.domain.ImmutableCloudMetadata;
+import org.cloudfoundry.client.lib.util.ExecutionRetrier;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -21,7 +22,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.sap.cloud.lm.sl.cf.client.util.ExecutionRetrier;
 import com.sap.cloud.lm.sl.common.util.Tester;
 import com.sap.cloud.lm.sl.common.util.Tester.Expectation;
 
@@ -42,7 +42,7 @@ public class RecentLogsRetrieverTest {
     private RestTemplate restTemplate;
 
     private ExecutionRetrier fastRetrier = new ExecutionRetrier().withRetryCount(1)
-        .withWaitTimeBetweenRetriesInMillis(1);
+                                                                 .withWaitTimeBetweenRetriesInMillis(1);
 
     private RecentLogsRetriever recentLogsRetriever;
 

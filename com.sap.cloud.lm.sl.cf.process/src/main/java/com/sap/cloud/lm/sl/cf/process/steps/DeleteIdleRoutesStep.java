@@ -1,19 +1,18 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import java.util.List;
-
+import com.sap.cloud.lm.sl.cf.core.helpers.ClientHelper;
+import com.sap.cloud.lm.sl.cf.process.message.Messages;
 import org.apache.commons.collections4.ListUtils;
 import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import com.sap.cloud.lm.sl.cf.core.helpers.ClientHelper;
-import com.sap.cloud.lm.sl.cf.process.message.Messages;
+import java.util.List;
 
 @Component("deleteIdleRoutesStep")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

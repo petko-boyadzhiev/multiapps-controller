@@ -6,10 +6,10 @@ import java.net.MalformedURLException;
 import java.util.UUID;
 
 import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.domain.CloudService;
 import org.cloudfoundry.client.lib.domain.ImmutableCloudMetadata;
 import org.cloudfoundry.client.lib.domain.ImmutableCloudService;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;

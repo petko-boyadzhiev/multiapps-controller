@@ -1,7 +1,7 @@
 package com.sap.cloud.lm.sl.cf.web.security;
 
 import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudOperationException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

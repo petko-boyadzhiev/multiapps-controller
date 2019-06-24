@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import org.cloudfoundry.client.lib.CloudControllerClient;
 import org.cloudfoundry.client.lib.CloudCredentials;
+import org.cloudfoundry.client.lib.ResilientCloudControllerClient;
 import org.cloudfoundry.client.lib.domain.CloudSpace;
 import org.cloudfoundry.client.lib.oauth2.OAuthClient;
 import org.cloudfoundry.client.lib.rest.CloudControllerRestClient;
@@ -16,7 +17,6 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.web.client.RestTemplate;
 
 import com.sap.cloud.lm.sl.cf.client.CloudFoundryTokenProvider;
-import com.sap.cloud.lm.sl.cf.client.ResilientCloudControllerClient;
 import com.sap.cloud.lm.sl.cf.client.TokenProvider;
 import com.sap.cloud.lm.sl.cf.core.util.ApplicationConfiguration;
 import com.sap.cloud.lm.sl.common.util.Pair;

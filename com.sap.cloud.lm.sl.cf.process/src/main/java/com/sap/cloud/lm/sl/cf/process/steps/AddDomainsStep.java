@@ -1,18 +1,17 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
+import com.sap.cloud.lm.sl.cf.process.message.Messages;
+import com.sap.cloud.lm.sl.common.SLException;
 import org.cloudfoundry.client.lib.CloudControllerClient;
 import org.cloudfoundry.client.lib.domain.CloudDomain;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.sap.cloud.lm.sl.cf.process.message.Messages;
-import com.sap.cloud.lm.sl.common.SLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component("addDomainsStep")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

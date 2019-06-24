@@ -4,11 +4,11 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.CloudControllerClient;
 import org.cloudfoundry.client.lib.domain.CloudService;
 import org.cloudfoundry.client.lib.domain.CloudServiceOffering;
 import org.cloudfoundry.client.lib.domain.CloudServicePlan;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.springframework.http.HttpStatus;
 
 import com.sap.cloud.lm.sl.cf.core.message.Messages;

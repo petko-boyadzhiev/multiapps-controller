@@ -1,16 +1,15 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static java.text.MessageFormat.format;
-
-import java.util.LinkedList;
-import java.util.List;
-
+import com.sap.cloud.lm.sl.cf.core.cf.clients.RecentLogsRetriever;
+import com.sap.cloud.lm.sl.cf.core.util.ApplicationConfiguration;
+import com.sap.cloud.lm.sl.cf.process.Constants;
+import com.sap.cloud.lm.sl.cf.process.message.Messages;
 import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.StartingInfo;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
 import org.cloudfoundry.client.lib.domain.CloudApplication.State;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -18,10 +17,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import com.sap.cloud.lm.sl.cf.core.cf.clients.RecentLogsRetriever;
-import com.sap.cloud.lm.sl.cf.core.util.ApplicationConfiguration;
-import com.sap.cloud.lm.sl.cf.process.Constants;
-import com.sap.cloud.lm.sl.cf.process.message.Messages;
+import java.util.LinkedList;
+import java.util.List;
+
+import static java.text.MessageFormat.format;
 
 @Component("restartAppStep")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

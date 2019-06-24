@@ -1,17 +1,5 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import java.text.MessageFormat;
-import java.util.List;
-import java.util.function.Function;
-
-import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.cloudfoundry.client.lib.domain.CloudApplication;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import com.sap.cloud.lm.sl.cf.core.cf.detect.DeployedComponentsDetector;
 import com.sap.cloud.lm.sl.cf.core.model.DeployedComponents;
 import com.sap.cloud.lm.sl.cf.core.model.DeployedMta;
@@ -20,6 +8,17 @@ import com.sap.cloud.lm.sl.cf.process.Constants;
 import com.sap.cloud.lm.sl.cf.process.message.Messages;
 import com.sap.cloud.lm.sl.common.SLException;
 import com.sap.cloud.lm.sl.common.util.JsonUtil;
+import org.cloudfoundry.client.lib.CloudControllerClient;
+import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import java.text.MessageFormat;
+import java.util.List;
+import java.util.function.Function;
 
 @Component("detectDeployedMtaStep")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

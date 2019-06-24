@@ -1,22 +1,21 @@
 package com.sap.cloud.lm.sl.cf.core.cf;
 
-import java.net.MalformedURLException;
-import java.util.Collections;
-import java.util.Map;
-
-import org.apache.commons.collections4.map.AbstractReferenceMap.ReferenceStrength;
-import org.apache.commons.collections4.map.ReferenceMap;
-import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.stereotype.Component;
-
 import com.sap.cloud.lm.sl.cf.client.TokenProvider;
 import com.sap.cloud.lm.sl.cf.core.cf.service.TokenService;
 import com.sap.cloud.lm.sl.cf.core.message.Messages;
 import com.sap.cloud.lm.sl.common.SLException;
 import com.sap.cloud.lm.sl.common.util.Pair;
+import org.apache.commons.collections4.map.AbstractReferenceMap.ReferenceStrength;
+import org.apache.commons.collections4.map.ReferenceMap;
+import org.cloudfoundry.client.lib.CloudControllerClient;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.stereotype.Component;
+
+import java.net.MalformedURLException;
+import java.util.Collections;
+import java.util.Map;
 
 @Component
 public class CloudControllerClientProvider {

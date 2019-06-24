@@ -1,14 +1,13 @@
 package com.sap.cloud.lm.sl.cf.process.util;
 
-import java.util.function.Supplier;
-
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.cloudfoundry.client.lib.CloudServiceBrokerException;
-import org.springframework.http.HttpStatus;
-
 import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudServiceExtended;
 import com.sap.cloud.lm.sl.cf.process.message.Messages;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.cloudfoundry.client.lib.exception.CloudServiceBrokerException;
+import org.springframework.http.HttpStatus;
+
+import java.util.function.Supplier;
 
 public class ServiceOperationExecutor {
 

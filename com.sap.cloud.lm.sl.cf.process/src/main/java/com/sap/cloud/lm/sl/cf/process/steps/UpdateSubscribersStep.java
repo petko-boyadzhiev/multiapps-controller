@@ -1,36 +1,5 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static com.sap.cloud.lm.sl.common.util.JsonUtil.convertJsonToList;
-import static com.sap.cloud.lm.sl.common.util.JsonUtil.convertJsonToMap;
-import static com.sap.cloud.lm.sl.common.util.JsonUtil.toJson;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.TreeMap;
-import java.util.UUID;
-import java.util.function.BiFunction;
-import java.util.stream.Collectors;
-
-import javax.inject.Inject;
-
-import org.apache.commons.collections4.ListUtils;
-import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.cloudfoundry.client.lib.domain.CloudApplication;
-import org.cloudfoundry.client.lib.domain.CloudOrganization;
-import org.cloudfoundry.client.lib.domain.CloudSpace;
-import org.cloudfoundry.client.lib.domain.ImmutableCloudApplication;
-import org.cloudfoundry.client.lib.domain.ImmutableCloudOrganization;
-import org.cloudfoundry.client.lib.domain.ImmutableCloudSpace;
-import org.flowable.engine.delegate.DelegateExecution;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudApplicationExtended;
 import com.sap.cloud.lm.sl.cf.core.cf.HandlerFactory;
 import com.sap.cloud.lm.sl.cf.core.cf.v2.ApplicationCloudModelBuilder;
@@ -63,6 +32,35 @@ import com.sap.cloud.lm.sl.mta.resolvers.Reference;
 import com.sap.cloud.lm.sl.mta.resolvers.ReferencePattern;
 import com.sap.cloud.lm.sl.mta.resolvers.ResolverBuilder;
 import com.sap.cloud.lm.sl.mta.util.ValidatorUtil;
+import org.apache.commons.collections4.ListUtils;
+import org.cloudfoundry.client.lib.CloudControllerClient;
+import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.domain.CloudOrganization;
+import org.cloudfoundry.client.lib.domain.CloudSpace;
+import org.cloudfoundry.client.lib.domain.ImmutableCloudApplication;
+import org.cloudfoundry.client.lib.domain.ImmutableCloudOrganization;
+import org.cloudfoundry.client.lib.domain.ImmutableCloudSpace;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.flowable.engine.delegate.DelegateExecution;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.TreeMap;
+import java.util.UUID;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
+
+import static com.sap.cloud.lm.sl.common.util.JsonUtil.convertJsonToList;
+import static com.sap.cloud.lm.sl.common.util.JsonUtil.convertJsonToMap;
+import static com.sap.cloud.lm.sl.common.util.JsonUtil.toJson;
 
 @Component("updateSubscribersStep")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

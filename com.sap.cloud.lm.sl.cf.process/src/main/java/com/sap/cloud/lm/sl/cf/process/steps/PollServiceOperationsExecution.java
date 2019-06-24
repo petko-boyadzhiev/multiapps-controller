@@ -1,6 +1,17 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static java.text.MessageFormat.format;
+import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudServiceExtended;
+import com.sap.cloud.lm.sl.cf.core.cf.services.ServiceOperation;
+import com.sap.cloud.lm.sl.cf.core.cf.services.ServiceOperationState;
+import com.sap.cloud.lm.sl.cf.core.cf.services.ServiceOperationType;
+import com.sap.cloud.lm.sl.cf.core.cf.services.TypedServiceOperationState;
+import com.sap.cloud.lm.sl.cf.process.message.Messages;
+import com.sap.cloud.lm.sl.common.SLException;
+import com.sap.cloud.lm.sl.common.util.JsonUtil;
+import org.apache.commons.collections4.CollectionUtils;
+import org.cloudfoundry.client.lib.CloudControllerClient;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -12,19 +23,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
-
-import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudServiceExtended;
-import com.sap.cloud.lm.sl.cf.core.cf.services.ServiceOperation;
-import com.sap.cloud.lm.sl.cf.core.cf.services.ServiceOperationState;
-import com.sap.cloud.lm.sl.cf.core.cf.services.ServiceOperationType;
-import com.sap.cloud.lm.sl.cf.core.cf.services.TypedServiceOperationState;
-import com.sap.cloud.lm.sl.cf.process.message.Messages;
-import com.sap.cloud.lm.sl.common.SLException;
-import com.sap.cloud.lm.sl.common.util.JsonUtil;
+import static java.text.MessageFormat.format;
 
 public abstract class PollServiceOperationsExecution implements AsyncExecution {
 

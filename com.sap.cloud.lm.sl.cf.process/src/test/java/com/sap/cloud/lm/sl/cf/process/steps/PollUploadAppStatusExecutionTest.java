@@ -1,18 +1,14 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
+import com.sap.cloud.lm.sl.cf.process.Constants;
+import com.sap.cloud.lm.sl.cf.process.steps.ScaleAppStepTest.SimpleApplication;
+import com.sap.cloud.lm.sl.common.util.JsonUtil;
 import org.cloudfoundry.client.lib.domain.ErrorDetails;
 import org.cloudfoundry.client.lib.domain.Status;
 import org.cloudfoundry.client.lib.domain.Upload;
 import org.cloudfoundry.client.lib.domain.UploadToken;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,9 +18,12 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.springframework.http.HttpStatus;
 
-import com.sap.cloud.lm.sl.cf.process.Constants;
-import com.sap.cloud.lm.sl.cf.process.steps.ScaleAppStepTest.SimpleApplication;
-import com.sap.cloud.lm.sl.common.util.JsonUtil;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 @RunWith(Parameterized.class)
 public class PollUploadAppStatusExecutionTest extends AsyncStepOperationTest<UploadAppStep> {

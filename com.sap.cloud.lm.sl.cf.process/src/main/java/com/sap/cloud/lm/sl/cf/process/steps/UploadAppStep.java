@@ -1,28 +1,5 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-
-import org.apache.commons.io.FileUtils;
-import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.cloudfoundry.client.lib.domain.CloudApplication;
-import org.cloudfoundry.client.lib.domain.Status;
-import org.cloudfoundry.client.lib.domain.UploadToken;
-import org.flowable.engine.delegate.DelegateExecution;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudApplicationExtended;
 import com.sap.cloud.lm.sl.cf.client.lib.domain.UploadStatusCallbackExtended;
 import com.sap.cloud.lm.sl.cf.core.helpers.ApplicationAttributes;
@@ -40,6 +17,27 @@ import com.sap.cloud.lm.sl.cf.process.util.ApplicationArchiveReader;
 import com.sap.cloud.lm.sl.cf.process.util.ApplicationDigestDetector;
 import com.sap.cloud.lm.sl.cf.process.util.ApplicationZipBuilder;
 import com.sap.cloud.lm.sl.common.SLException;
+import org.apache.commons.io.FileUtils;
+import org.cloudfoundry.client.lib.CloudControllerClient;
+import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.domain.Status;
+import org.cloudfoundry.client.lib.domain.UploadToken;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.flowable.engine.delegate.DelegateExecution;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Component("uploadAppStep")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

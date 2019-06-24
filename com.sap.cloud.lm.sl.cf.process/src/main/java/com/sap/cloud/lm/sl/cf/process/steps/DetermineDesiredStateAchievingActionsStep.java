@@ -1,18 +1,5 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import java.util.Set;
-import java.util.function.Supplier;
-
-import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.cloudfoundry.client.lib.domain.CloudApplication;
-import org.flowable.engine.delegate.DelegateExecution;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudApplicationExtended;
 import com.sap.cloud.lm.sl.cf.client.lib.domain.RestartParameters;
 import com.sap.cloud.lm.sl.cf.core.cf.apps.ActionCalculator;
@@ -26,6 +13,18 @@ import com.sap.cloud.lm.sl.cf.process.Constants;
 import com.sap.cloud.lm.sl.cf.process.message.Messages;
 import com.sap.cloud.lm.sl.cf.process.util.ApplicationStager;
 import com.sap.cloud.lm.sl.common.SLException;
+import org.cloudfoundry.client.lib.CloudControllerClient;
+import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.flowable.engine.delegate.DelegateExecution;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import java.util.Set;
+import java.util.function.Supplier;
 
 @Component("determineDesiredStateAchievingActionsStep")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

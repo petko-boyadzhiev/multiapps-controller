@@ -1,22 +1,21 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import javax.inject.Inject;
-
-import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.cloudfoundry.client.lib.domain.CloudApplication;
-import org.cloudfoundry.client.lib.domain.CloudApplication.State;
-import org.flowable.engine.delegate.DelegateExecution;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import com.sap.cloud.lm.sl.cf.core.model.HookPhase;
 import com.sap.cloud.lm.sl.cf.process.message.Messages;
 import com.sap.cloud.lm.sl.cf.process.util.ProcessTypeParser;
 import com.sap.cloud.lm.sl.cf.web.api.model.ProcessType;
 import com.sap.cloud.lm.sl.common.SLException;
+import org.cloudfoundry.client.lib.CloudControllerClient;
+import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.domain.CloudApplication.State;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.flowable.engine.delegate.DelegateExecution;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
 
 @Component("stopAppStep")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

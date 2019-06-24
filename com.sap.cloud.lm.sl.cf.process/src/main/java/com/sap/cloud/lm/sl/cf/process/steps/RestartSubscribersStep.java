@@ -1,17 +1,16 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import java.util.List;
-
+import com.sap.cloud.lm.sl.cf.process.message.Messages;
 import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
 import org.cloudfoundry.client.lib.domain.CloudOrganization;
 import org.cloudfoundry.client.lib.domain.CloudSpace;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.sap.cloud.lm.sl.cf.process.message.Messages;
+import java.util.List;
 
 @Component("restartSubscribersStep")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

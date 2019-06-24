@@ -1,18 +1,5 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static org.junit.Assert.assertNull;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.springframework.http.HttpStatus;
-
 import com.sap.cloud.lm.sl.cf.core.cf.detect.DeployedComponentsDetector;
 import com.sap.cloud.lm.sl.cf.core.model.DeployedComponents;
 import com.sap.cloud.lm.sl.cf.core.model.DeployedMta;
@@ -22,6 +9,18 @@ import com.sap.cloud.lm.sl.common.SLException;
 import com.sap.cloud.lm.sl.common.util.JsonUtil;
 import com.sap.cloud.lm.sl.common.util.TestUtil;
 import com.sap.cloud.lm.sl.common.util.Tester.Expectation;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.springframework.http.HttpStatus;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.when;
 
 public class DetectDeployedMtaStepTest extends SyncFlowableStepTest<DetectDeployedMtaStep> {
 

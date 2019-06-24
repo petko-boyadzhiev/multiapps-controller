@@ -1,23 +1,22 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import com.sap.cloud.lm.sl.cf.client.lib.domain.ImmutableCloudApplicationExtended;
+import org.cloudfoundry.client.lib.CloudControllerClient;
+import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.domain.CloudSpace;
+import org.cloudfoundry.client.lib.domain.ImmutableCloudOrganization;
+import org.cloudfoundry.client.lib.domain.ImmutableCloudSpace;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.junit.Test;
+import org.mockito.Mockito;
+import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.cloudfoundry.client.lib.domain.CloudApplication;
-import org.cloudfoundry.client.lib.domain.CloudSpace;
-import org.cloudfoundry.client.lib.domain.ImmutableCloudOrganization;
-import org.cloudfoundry.client.lib.domain.ImmutableCloudSpace;
-import org.junit.Test;
-import org.mockito.Mockito;
-import org.springframework.http.HttpStatus;
-
-import com.sap.cloud.lm.sl.cf.client.lib.domain.ImmutableCloudApplicationExtended;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 
 public class RestartSubscribersStepTest extends SyncFlowableStepTest<RestartSubscribersStep> {
 

@@ -4,13 +4,13 @@ import java.text.MessageFormat;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import org.cloudfoundry.client.lib.CloudOperationException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.cloudfoundry.client.lib.util.ExecutionRetrier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpStatusCodeException;
 
-import com.sap.cloud.lm.sl.cf.client.util.ExecutionRetrier;
 import com.sap.cloud.lm.sl.common.ParsingException;
 import com.sap.cloud.lm.sl.common.util.JsonUtil;
 

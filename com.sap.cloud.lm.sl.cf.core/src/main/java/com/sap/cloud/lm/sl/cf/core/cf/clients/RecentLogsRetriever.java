@@ -17,6 +17,7 @@ import javax.inject.Named;
 import org.apache.commons.fileupload.MultipartStream;
 import org.cloudfoundry.client.lib.CloudControllerClient;
 import org.cloudfoundry.client.lib.domain.ApplicationLog;
+import org.cloudfoundry.client.lib.util.ExecutionRetrier;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -26,7 +27,6 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.sap.cloud.lm.sl.cf.client.events.EventFactory;
 import com.sap.cloud.lm.sl.cf.client.events.LogFactory.LogMessage;
 import com.sap.cloud.lm.sl.cf.client.events.LogFactory.LogMessage.MessageType;
-import com.sap.cloud.lm.sl.cf.client.util.ExecutionRetrier;
 import com.sap.cloud.lm.sl.cf.core.message.Messages;
 import com.sap.cloud.lm.sl.common.SLException;
 
@@ -42,8 +42,8 @@ public class RecentLogsRetriever extends CustomControllerClient {
     }
 
     public List<ApplicationLog> getRecentLogs(CloudControllerClient client, String appName) {
-        return new CustomControllerClientErrorHandler(getRetrier())
-            .handleErrorsOrReturnResult(() -> attemptToGetRecentLogs(client, appName));
+        return new CustomControllerClientErrorHandler(getRetrier()).handleErrorsOrReturnResult(() -> attemptToGetRecentLogs(client,
+                                                                                                                            appName));
     }
 
     protected ExecutionRetrier getRetrier() {
@@ -54,24 +54,24 @@ public class RecentLogsRetriever extends CustomControllerClient {
         return retrier;
     }
 
-    public void setFailSafe(boolean failSafe) {
-        this.failSafe = failSafe;
-    }
-
     public boolean isFailSafe() {
         return this.failSafe;
     }
 
+    public void setFailSafe(boolean failSafe) {
+        this.failSafe = failSafe;
+    }
+
     private List<ApplicationLog> attemptToGetRecentLogs(CloudControllerClient client, String appName) {
         UUID applicationGuid = client.getApplication(appName)
-            .getMetadata()
-            .getGuid();
+                                     .getMetadata()
+                                     .getGuid();
         String dopplerEndpoint = getDopplerEndpoint(client.getCloudInfo()
-            .getLoggingEndpoint());
+                                                          .getLoggingEndpoint());
 
         String recentLogsUrl = dopplerEndpoint + RECENT_LOGS_ENDPOINT;
         ResponseEntity<Resource> responseResource = getRestTemplate(client).exchange(recentLogsUrl, HttpMethod.GET, null, Resource.class,
-            applicationGuid);
+                                                                                     applicationGuid);
         List<LogMessageConverter> logMessages = null;
         try {
             logMessages = extractLogMessages(responseResource);
@@ -86,19 +86,21 @@ public class RecentLogsRetriever extends CustomControllerClient {
 
     private List<ApplicationLog> convertToApplicationLogs(List<LogMessageConverter> logMessages) {
         return logMessages.stream()
-            .map(LogMessageConverter::convertToApplicationLog)
-            .collect(Collectors.toList());
+                          .map(LogMessageConverter::convertToApplicationLog)
+                          .collect(Collectors.toList());
     }
 
     private List<LogMessageConverter> extractLogMessages(ResponseEntity<Resource> responseResource) throws IOException {
         List<LogMessageConverter> parsedLogs = new ArrayList<>();
         MediaType contentType = responseResource.getHeaders()
-            .getContentType();
+                                                .getContentType();
         String boundary = contentType.getParameter("boundary");
         try (InputStream responseInputStream = responseResource.getBody()
-            .getInputStream()) {
-            MultipartStream multipartStream = new MultipartStream(responseInputStream, boundary.getBytes(StandardCharsets.UTF_8), 16 * 1024,
-                null);
+                                                               .getInputStream()) {
+            MultipartStream multipartStream = new MultipartStream(responseInputStream,
+                                                                  boundary.getBytes(StandardCharsets.UTF_8),
+                                                                  16 * 1024,
+                                                                  null);
             while (multipartStream.skipPreamble()) {
                 try (ByteArrayOutputStream part = new ByteArrayOutputStream()) {
                     multipartStream.readBodyData(part);
@@ -143,9 +145,13 @@ public class RecentLogsRetriever extends CustomControllerClient {
         }
 
         public ApplicationLog convertToApplicationLog() {
-            return new ApplicationLog(logMessage.getAppId(), logMessage.getMessage()
-                .toStringUtf8(), new Date(logMessage.getTimestamp()), getMessageType(), logMessage.getSourceType(),
-                logMessage.getSourceInstance());
+            return new ApplicationLog(logMessage.getAppId(),
+                                      logMessage.getMessage()
+                                                .toStringUtf8(),
+                                      new Date(logMessage.getTimestamp()),
+                                      getMessageType(),
+                                      logMessage.getSourceType(),
+                                      logMessage.getSourceInstance());
         }
 
         private org.cloudfoundry.client.lib.domain.ApplicationLog.MessageType getMessageType() {

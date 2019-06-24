@@ -1,23 +1,23 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static java.text.MessageFormat.format;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.when;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Path;
-import java.util.Arrays;
-
+import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudApplicationExtended;
+import com.sap.cloud.lm.sl.cf.client.lib.domain.ImmutableCloudApplicationExtended;
+import com.sap.cloud.lm.sl.cf.core.helpers.MtaArchiveElements;
+import com.sap.cloud.lm.sl.cf.core.util.ApplicationConfiguration;
+import com.sap.cloud.lm.sl.cf.persistence.processors.FileDownloadProcessor;
+import com.sap.cloud.lm.sl.cf.process.Constants;
+import com.sap.cloud.lm.sl.cf.process.message.Messages;
+import com.sap.cloud.lm.sl.cf.process.steps.ScaleAppStepTest.SimpleApplication;
+import com.sap.cloud.lm.sl.cf.process.util.ApplicationArchiveContext;
+import com.sap.cloud.lm.sl.cf.process.util.ApplicationArchiveReader;
+import com.sap.cloud.lm.sl.cf.process.util.ApplicationZipBuilder;
+import com.sap.cloud.lm.sl.common.SLException;
+import com.sap.cloud.lm.sl.common.util.JsonUtil;
+import com.sap.cloud.lm.sl.common.util.MapUtil;
 import org.apache.commons.io.FileUtils;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.domain.UploadToken;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -33,20 +33,19 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.http.HttpStatus;
 
-import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudApplicationExtended;
-import com.sap.cloud.lm.sl.cf.client.lib.domain.ImmutableCloudApplicationExtended;
-import com.sap.cloud.lm.sl.cf.core.helpers.MtaArchiveElements;
-import com.sap.cloud.lm.sl.cf.core.util.ApplicationConfiguration;
-import com.sap.cloud.lm.sl.cf.persistence.processors.FileDownloadProcessor;
-import com.sap.cloud.lm.sl.cf.process.Constants;
-import com.sap.cloud.lm.sl.cf.process.message.Messages;
-import com.sap.cloud.lm.sl.cf.process.steps.ScaleAppStepTest.SimpleApplication;
-import com.sap.cloud.lm.sl.cf.process.util.ApplicationArchiveContext;
-import com.sap.cloud.lm.sl.cf.process.util.ApplicationArchiveReader;
-import com.sap.cloud.lm.sl.cf.process.util.ApplicationZipBuilder;
-import com.sap.cloud.lm.sl.common.SLException;
-import com.sap.cloud.lm.sl.common.util.JsonUtil;
-import com.sap.cloud.lm.sl.common.util.MapUtil;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.util.Arrays;
+
+import static java.text.MessageFormat.format;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 
 @RunWith(Enclosed.class)
 public class UploadAppStepTest {

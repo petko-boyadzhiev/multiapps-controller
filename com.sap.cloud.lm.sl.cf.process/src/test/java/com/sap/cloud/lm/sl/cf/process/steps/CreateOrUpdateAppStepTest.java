@@ -1,18 +1,16 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
+import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudServiceExtended;
+import com.sap.cloud.lm.sl.cf.client.lib.domain.ImmutableCloudApplicationExtended;
+import com.sap.cloud.lm.sl.cf.client.lib.domain.ImmutableCloudServiceExtended;
+import com.sap.cloud.lm.sl.cf.process.Constants;
+import com.sap.cloud.lm.sl.common.util.GenericArgumentMatcher;
+import com.sap.cloud.lm.sl.common.util.JsonUtil;
+import com.sap.cloud.lm.sl.common.util.ListUtil;
+import com.sap.cloud.lm.sl.common.util.TestUtil;
 import org.cloudfoundry.client.lib.ApplicationServicesUpdateCallback;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.domain.CloudServiceKey;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.junit.Before;
 import org.junit.Rule;
@@ -24,14 +22,15 @@ import org.junit.runners.Parameterized.Parameters;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 
-import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudServiceExtended;
-import com.sap.cloud.lm.sl.cf.client.lib.domain.ImmutableCloudApplicationExtended;
-import com.sap.cloud.lm.sl.cf.client.lib.domain.ImmutableCloudServiceExtended;
-import com.sap.cloud.lm.sl.cf.process.Constants;
-import com.sap.cloud.lm.sl.common.util.GenericArgumentMatcher;
-import com.sap.cloud.lm.sl.common.util.JsonUtil;
-import com.sap.cloud.lm.sl.common.util.ListUtil;
-import com.sap.cloud.lm.sl.common.util.TestUtil;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
 
 @RunWith(Parameterized.class)
 public class CreateOrUpdateAppStepTest extends CreateOrUpdateAppStepBaseTest {

@@ -7,8 +7,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

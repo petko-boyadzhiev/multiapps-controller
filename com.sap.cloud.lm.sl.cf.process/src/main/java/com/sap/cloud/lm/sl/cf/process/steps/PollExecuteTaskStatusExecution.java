@@ -1,19 +1,18 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import java.util.function.Supplier;
-
-import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.cloudfoundry.client.lib.domain.CloudTask;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.sap.cloud.lm.sl.cf.client.lib.domain.CloudApplicationExtended;
 import com.sap.cloud.lm.sl.cf.core.cf.clients.RecentLogsRetriever;
 import com.sap.cloud.lm.sl.cf.persistence.services.ProcessLoggerProvider;
 import com.sap.cloud.lm.sl.cf.process.message.Messages;
 import com.sap.cloud.lm.sl.common.SLException;
+import org.cloudfoundry.client.lib.CloudControllerClient;
+import org.cloudfoundry.client.lib.domain.CloudTask;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.function.Supplier;
 
 public class PollExecuteTaskStatusExecution implements AsyncExecution {
 

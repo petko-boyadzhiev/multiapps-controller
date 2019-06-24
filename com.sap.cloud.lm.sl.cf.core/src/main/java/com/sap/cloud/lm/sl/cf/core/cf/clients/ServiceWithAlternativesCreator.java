@@ -12,9 +12,9 @@ import javax.inject.Inject;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.domain.CloudServiceOffering;
 import org.cloudfoundry.client.lib.domain.CloudServicePlan;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 

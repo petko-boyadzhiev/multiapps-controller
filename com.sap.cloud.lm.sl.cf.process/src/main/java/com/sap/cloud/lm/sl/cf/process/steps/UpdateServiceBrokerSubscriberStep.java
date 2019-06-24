@@ -1,18 +1,17 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import java.text.MessageFormat;
-
+import com.sap.cloud.lm.sl.cf.process.message.Messages;
 import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
 import org.cloudfoundry.client.lib.domain.CloudServiceBroker;
 import org.cloudfoundry.client.lib.domain.ImmutableCloudServiceBroker;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.sap.cloud.lm.sl.cf.process.message.Messages;
+import java.text.MessageFormat;
 
 @Component("updateServiceBrokerSubscriberStep")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

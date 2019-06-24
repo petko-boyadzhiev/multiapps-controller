@@ -1,16 +1,15 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static java.text.MessageFormat.format;
-
+import com.sap.cloud.lm.sl.cf.process.message.Messages;
+import com.sap.cloud.lm.sl.common.SLException;
 import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
 import org.cloudfoundry.client.lib.domain.Upload;
 import org.cloudfoundry.client.lib.domain.UploadToken;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
 
-import com.sap.cloud.lm.sl.cf.process.message.Messages;
-import com.sap.cloud.lm.sl.common.SLException;
+import static java.text.MessageFormat.format;
 
 public class PollUploadAppStatusExecution implements AsyncExecution {
 

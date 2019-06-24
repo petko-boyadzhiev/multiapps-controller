@@ -1,17 +1,5 @@
 package com.sap.cloud.lm.sl.cf.process.steps;
 
-import static java.text.MessageFormat.format;
-
-import java.util.UUID;
-
-import org.cloudfoundry.client.lib.CloudControllerClient;
-import org.cloudfoundry.client.lib.CloudControllerException;
-import org.cloudfoundry.client.lib.CloudOperationException;
-import org.cloudfoundry.client.lib.domain.CloudApplication;
-import org.cloudfoundry.client.lib.domain.PackageState;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.sap.cloud.lm.sl.cf.core.cf.clients.RecentLogsRetriever;
 import com.sap.cloud.lm.sl.cf.persistence.services.ProcessLoggerProvider;
 import com.sap.cloud.lm.sl.cf.process.Constants;
@@ -21,6 +9,17 @@ import com.sap.cloud.lm.sl.cf.process.util.StagingState;
 import com.sap.cloud.lm.sl.cf.process.util.StagingState.StagingLogs;
 import com.sap.cloud.lm.sl.cf.process.util.XMLValueFilter;
 import com.sap.cloud.lm.sl.common.SLException;
+import org.cloudfoundry.client.lib.CloudControllerClient;
+import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.domain.PackageState;
+import org.cloudfoundry.client.lib.exception.CloudControllerException;
+import org.cloudfoundry.client.lib.exception.CloudOperationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.UUID;
+
+import static java.text.MessageFormat.format;
 
 public class PollStageAppStatusExecution implements AsyncExecution {
 
